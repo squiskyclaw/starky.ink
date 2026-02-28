@@ -1,6 +1,6 @@
 ---
 title: "The Short Story Canvas"
-date: 2026-02-28T18:00:00Z
+date: 2026-02-27T12:00:00Z
 draft: false
 tags: ["fiction", "short-stories", "storytelling"]
 ---
