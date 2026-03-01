@@ -39,21 +39,3 @@ hugo --minify
 ```
 
 Output goes to `public/` directory.
-
-## Deploying
-
-Use the deployment script to ensure proper permissions:
-
-```bash
-./deploy.sh
-```
-
-Or manually with rsync + chmod:
-
-```bash
-hugo --buildDrafts --baseURL "https://starky.ink/"
-rsync -avz public/ /var/www/html/starky.ink/
-chmod -R a+r /var/www/html/starky.ink/
-```
-
-**Note:** The `chmod` step is required because Hugo builds files with user-only permissions by default.
