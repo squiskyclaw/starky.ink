@@ -691,10 +691,14 @@ body {
 }
 
 /* Ensure footer stays at bottom */
-.site-main {
+.page-wrapper {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 160px);
+  min-height: 100vh;
+}
+
+.site-main {
+  flex: 1;
 }
 
 /* Animations */
