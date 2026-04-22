@@ -1,26 +1,33 @@
 {{ define "main" }}
-<div class="page-header">
-    <div class="container">
-        <h1>{{ .Title }}</h1>
-        {{ if .Content }}
-        <div class="page-content">
-            {{ .Content }}
-        </div>
-        {{ end }}
+<header class="page-header container-narrow">
+    <h1>{{ .Title }}</h1>
+    {{ if .Content }}
+    <div style="max-width: 540px; margin: 0 auto; color: var(--text-sec); font-size: 1.05rem; line-height: 1.6; margin-top: 1rem;">
+        {{ .Content }}
     </div>
-</div>
+    {{ end }}
+</header>
 
-<div class="content-list">
-    <div class="container">
+<section class="content-list">
+    <div class="container-narrow">
         {{ range .Pages }}
         <article class="content-item">
-            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
             <time class="date">{{ .Date.Format "January 2, 2006" }}</time>
+            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
             {{ if .Summary }}
             <p class="summary">{{ .Summary }}</p>
+            {{ else }}
+            <p class="summary">{{ .Content | plainify | truncate 160 }}</p>
+            {{ end }}
+            {{ if .Params.tags }}
+            <div class="tags" style="margin-top: 0.5rem;">
+                {{ range first 3 .Params.tags }}
+                <span class="tag">{{ . }}</span>
+                {{ end }}
+            </div>
             {{ end }}
         </article>
         {{ end }}
     </div>
-</div>
+</section>
 {{ end }}

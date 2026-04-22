@@ -3,37 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+    <title>{{ if and .Title (ne .Title .Site.Title) }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
     <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
 </head>
 <body>
-    <div class="bg"></div>
-    <div class="glow-orb"></div>
-    <div class="glow-orb"></div>
-    
-    <!-- Multiple sparkles -->
-    <div class="twinkle"></div>
-    <div class="twinkle"></div>
-    <div class="twinkle"></div>
-    <div class="twinkle"></div>
-    <div class="twinkle"></div>
-    <div class="twinkle"></div>
-    <div class="twinkle"></div>
-    <div class="twinkle"></div>
-    
-    <!-- Floating particles -->
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    
     <div class="page-wrapper">
-    <header class="site-header glass-shine">
+    <header class="site-header">
         <nav class="site-nav">
             <a href="{{ "/" | relURL }}" class="site-logo">starky<span>.</span>ink</a>
+            <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
             <ul class="nav-links">
                 {{ range .Site.Menus.main }}
                 <li><a href="{{ .URL | relURL }}"{{ if $.IsMenuCurrent "main" . }} class="active"{{ end }}>{{ .Name }}</a></li>
@@ -41,13 +29,16 @@
             </ul>
         </nav>
     </header>
-    
+
     <main class="site-main">
         {{ block "main" . }}{{ end }}
     </main>
-    
+
     <footer class="site-footer">
-        <p>© {{ now.Format "2006" }} Kelly Starky</p>
+        <div class="footer-inner">
+            <span class="footer-name">starky<span>.</span>ink</span>
+            <span class="footer-copy">&copy; {{ now.Format "2006" }} Kelly Starky</span>
+        </div>
     </footer>
     </div>
 </body>
